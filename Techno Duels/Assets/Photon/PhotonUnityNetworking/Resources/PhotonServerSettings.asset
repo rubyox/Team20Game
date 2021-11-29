@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 85d112a3-30e0-4469-a229-6dea9621bb11
-    AppIdFusion: 
+    AppIdRealtime: 20da111e-a467-47c0-be9c-d632a2bfeb76
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -22,23 +21,21 @@ MonoBehaviour:
     FixedRegion: 
     Server: 
     Port: 0
-    ProxyServer: 
     Protocol: 0
-    EnableProtocolFallback: 1
-    AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: eu
+  StartInOfflineMode: 0
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
-  StartInOfflineMode: 0
   RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
+  - ChangeScene
+  - Die
+  - Initialize
+  - SetNextTurn
+  - TakeDamage
+  - UpdateHealthBar
+  - UpdateLobbyUI
+  - WinGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 1
