@@ -136,7 +136,7 @@ MonoBehaviour:
   minDamage: 2
   maxDamage: 4
   maxMoveDistance: 4
-  maxAttackDistance: 5
+  maxAttackDistance: 1
   usedThisTurn: 0
   selectedVisual: {fileID: 4929212289562808457}
   spriteVisual: {fileID: 5555387409707760761}
