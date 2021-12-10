@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -28,8 +30,29 @@ public class PlayerInfo : MonoBehaviour
             {
                 profile = result.PlayerProfile;
                 Debug.Log("Loaded in player: " + profile.DisplayName);
+                PhotonNetwork.NickName = profile.DisplayName;
             },
             error => Debug.Log(error.ErrorMessage)
         );
+    }
+
+    public void UpdateLeaderboard(){
+        var request = new UpdatePlayerStatisticsRequest {
+            Statistics = new List<StatisticUpdate> {
+                new StatisticUpdate {
+                    StatisticName = "Ranking Score",
+                    Value = 5
+                }
+            }
+        };
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderBoardUpdate, OnError);
+    }
+
+    void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult result) {
+        Debug.Log("Successfully Updated Leaderboard");
+    }
+
+    void OnError (PlayFabError error) {
+        Debug.Log("Error While Updating Leaderboard");
     }
 }

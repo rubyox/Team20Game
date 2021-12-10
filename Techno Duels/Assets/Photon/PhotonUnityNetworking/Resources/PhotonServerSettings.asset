@@ -32,11 +32,11 @@ MonoBehaviour:
   - ChangeScene
   - Die
   - Initialize
+  - Log
   - SetNextTurn
   - TakeDamage
   - UpdateHealthBar
   - UpdateLobbyUI
   - WinGame
-  - Log
   DisableAutoOpenWizard: 1
   ShowSettings: 0

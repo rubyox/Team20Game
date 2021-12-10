@@ -45,11 +45,6 @@ public class Menu : MonoBehaviourPunCallbacks
         screen.SetActive(true);
     }
 
-    // updates the player's nickname
-    public void OnUpdatePlayerNameInput (TMP_InputField nameInput)
-    {
-        PhotonNetwork.NickName = nameInput.text;
-    }
 
     // called when the "Play" button is pressed
     public void OnPlayButton ()
