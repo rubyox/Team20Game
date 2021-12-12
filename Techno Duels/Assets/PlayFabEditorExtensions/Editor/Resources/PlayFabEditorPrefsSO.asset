@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: 200067528@aston.ac.uk
-  DevAccountToken: 76ut7o5khk4yccb3ofjgwr5zqueoqpha7i4nsp76yoecadw68nmsetmeg3n57nd9irrw9cwqhruuu3u7spwbc784d6puzk6rt47bcpbqxk3ytx151pze7wtxx5cptbonabgdoc13ods8hpc3wyug4arfoe3wfqs5wssdasfy11fc6jj7rmnh7m8gknptmq4snmh4msqo
-  SelectedStudio: TechnoDuelsPlayfab
-  SdkPath: Assets/PlayFabSDK
+  DevAccountEmail: 
+  DevAccountToken: 
+  SelectedStudio: 
+  SdkPath: 
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0

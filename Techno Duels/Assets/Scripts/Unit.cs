@@ -40,7 +40,7 @@ public class Unit : MonoBehaviourPun
         spriteVisual.sprite = transform.position.x < 0 ? leftPlayerSprite : rightPlayerSprite;
 
         // rotate the unit
-        spriteVisual.transform.up = transform.position.x < 0 ? Vector3.left : Vector3.right;
+        spriteVisual.transform.right = transform.position.x < 0 ? Vector3.left : Vector3.right;
     }
 
     // can we be selected?
@@ -76,9 +76,7 @@ public class Unit : MonoBehaviourPun
     {
         usedThisTurn = true;
 
-        // rotate sprite
-        Vector3 dir = (transform.position - targetPos).normalized;
-        spriteVisual.transform.up = dir;
+       
 
         StartCoroutine(MoveOverTime());
 
