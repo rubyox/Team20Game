@@ -299,13 +299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582a09b86e71f8f4ba852430b30876a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHp: 15
-  maxHp: 15
+  curHp: 1
+  maxHp: 1
   moveSpeed: 1
   minDamage: 3
   maxDamage: 7
   maxMoveDistance: 1
-  maxAttackDistance: 7
+  maxAttackDistance: 4
   usedThisTurn: 0
   selectedVisual: {fileID: 680227284314415706}
   spriteVisual: {fileID: 8558565019684487792}

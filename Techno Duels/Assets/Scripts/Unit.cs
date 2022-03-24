@@ -12,6 +12,7 @@ public class Unit : MonoBehaviourPun
     public int minDamage;           // minimum damage
     public int maxDamage;           // maximum damage
 
+
     public int maxMoveDistance;     // max distance we can move per turn
     public int maxAttackDistance;   // max distance we can attack
 
@@ -111,6 +112,7 @@ public class Unit : MonoBehaviourPun
             photonView.RPC("UpdateHealthBar", RpcTarget.All, (float)curHp / (float)maxHp);
         }
     }
+
 
     // updates the UI health bar
     [PunRPC]
