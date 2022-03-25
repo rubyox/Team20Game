@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
@@ -21,6 +22,22 @@ public class LoginRegister : MonoBehaviour
     public static LoginRegister instance;
     void Awake () { instance = this; }
 
+    // encryption
+    string Encrypt(string pass)
+    {
+        System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+        byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
+        bs = x.ComputeHash(bs);
+        System.Text.StringBuilder s = new System.Text.StringBuilder();
+        foreach (byte b in bs)
+        {
+            s.Append(b.ToString("x2").ToLower());
+        }
+        return s.ToString();
+
+
+    }
+
     // called when the 'Login' button is pressed
     public void OnLoginButton ()
     {
@@ -28,7 +45,7 @@ public class LoginRegister : MonoBehaviour
         LoginWithPlayFabRequest loginRequest = new LoginWithPlayFabRequest
         {
             Username = usernameInput.text,
-            Password = passwordInput.text
+            Password = Encrypt (passwordInput.text)
         };
 
         // send the request to the API
@@ -47,6 +64,8 @@ public class LoginRegister : MonoBehaviour
         );
     }
 
+    
+
     // called when the 'Register' button is pressed
     public void OnRegisterButton ()
     {
@@ -55,7 +74,7 @@ public class LoginRegister : MonoBehaviour
         {
             Username = usernameInput.text,
             DisplayName = usernameInput.text,
-            Password = passwordInput.text,
+            Password = Encrypt (passwordInput.text),
             RequireBothUsernameAndEmail = false
         };
 
