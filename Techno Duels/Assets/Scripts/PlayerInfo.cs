@@ -35,24 +35,4 @@ public class PlayerInfo : MonoBehaviour
             error => Debug.Log(error.ErrorMessage)
         );
     }
-
-    public void UpdateLeaderboard(){
-        var request = new UpdatePlayerStatisticsRequest {
-            Statistics = new List<StatisticUpdate> {
-                new StatisticUpdate {
-                    StatisticName = "Ranking Score",
-                    Value = 5
-                }
-            }
-        };
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderBoardUpdate, OnError);
-    }
-
-    void OnLeaderBoardUpdate(UpdatePlayerStatisticsResult result) {
-        Debug.Log("Successfully Updated Leaderboard");
-    }
-
-    void OnError (PlayFabError error) {
-        Debug.Log("Error While Updating Leaderboard");
-    }
 }

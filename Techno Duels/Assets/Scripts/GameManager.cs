@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-
+using UnityEngine.UI;
+using PlayFab;
+using PlayFab.ClientModels;
+using TMPro;
+using UnityEngine.Events;
+using PlayFab.Json;
+using PlayFab.DataModels;
+using PlayFab.ProfilesModels;
 public class GameManager : MonoBehaviourPun
 {
     public PlayerController leftPlayer;
     public PlayerController rightPlayer;
-
+    public int playerHighScore;
     public PlayerController curPlayer;      // the player who's currently having their turn
-
     public float postGameTime;              // time between the game ending and us going back to the menu
-
+    
     // instance
     public static GameManager instance;
 
@@ -24,9 +30,14 @@ public class GameManager : MonoBehaviourPun
 
     void Start ()
     {
+        
+          
+        
+        
         // the master client will set the players
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
             SetPlayers();
+         
     }
 
     // creates the player data and spawns in the units
@@ -83,10 +94,20 @@ public class GameManager : MonoBehaviourPun
     {
         // get the winning player
         PlayerController player = winner == 0 ? leftPlayer : rightPlayer;
+        if (PlayerController.me.units.Count == 0)
+        {
+            PhotonNetwork.LeaveRoom();
+            
+        } else
+        {
+            LoginRegister.PFC.SetWins(1);
+        }
+        
+        
 
-        // set the win text
-        GameUI.instance.SetWinText(player.photonPlayer.NickName);
-
+    // set the win text
+    GameUI.instance.SetWinText(player.photonPlayer.NickName);
+       
         // go back to the menu after a few seconds
         Invoke("GoBackToMenu", postGameTime);
     }

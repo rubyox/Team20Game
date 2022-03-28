@@ -119,6 +119,7 @@ public class LoginRegister : MonoBehaviour
     //LoginRegister.PFC.SetStats()
     public void SetStats()
     {
+
         PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
         {
             // request.Statistics is a list, so multiple StatisticUpdate objects can be defined if required.
@@ -128,6 +129,56 @@ public class LoginRegister : MonoBehaviour
         },
         result => { Debug.Log("User statistics updated"); },
         error => { Debug.LogError(error.GenerateErrorReport()); });
+    }
+
+    public List<PlayerLeaderboardEntry> GetWins()
+    {
+        GetLeaderboardRequest request = new GetLeaderboardRequest();
+        request.MaxResultsCount = 10;
+        request.StatisticName = "Wins";
+        List<PlayerLeaderboardEntry> temp = new List<PlayerLeaderboardEntry>();
+        PlayFabClientAPI.GetLeaderboard(request, result => {
+            temp = result.Leaderboard;
+        }, error =>{
+           
+        });
+        if(temp.Count < 1)
+        {
+            return null;
+        }
+        return temp;
+    }
+
+
+    public void SetWins(int value)
+    {
+        GetPlayerStatisticsRequest findRequest = new GetPlayerStatisticsRequest();
+        List<string> names = new List<string>();
+        names.Add("Wins");
+        findRequest.StatisticNames = names;
+        int temp = 0;
+        PlayFabClientAPI.GetPlayerStatistics(findRequest, result =>
+        {
+
+            temp = result.Statistics[0].Value;
+            UpdatePlayerStatisticsRequest request = new UpdatePlayerStatisticsRequest();
+            List<StatisticUpdate> listUpdate = new List<StatisticUpdate>();
+            value += temp;
+            StatisticUpdate su = new StatisticUpdate();
+            su.StatisticName = "Wins";
+            su.Value += value;
+            listUpdate.Add(su);
+            request.Statistics = listUpdate;
+            PlayFabClientAPI.UpdatePlayerStatistics(request, result2 => {
+
+                Debug.Log("Wins have been set!");
+
+            }, error => {
+
+            });
+          
+        }, error => { Debug.LogError(error.ErrorMessage); });
+
     }
 
     void GetStats()
@@ -182,22 +233,37 @@ public class LoginRegister : MonoBehaviour
 
     #endregion PlayerStats
 
+    public GameObject leaderboardPanel;
+    public GameObject listingPrefab;
+    public Transform listingContainer;
 
     #region Leaderboard
     public void GetLeaderboarder()
     {
-        var requestLeaderboard = new GetLeaderboardRequest { StartPosition = 0, StatisticName = "playerHighScore", MaxResultsCount = 20 };
+        var requestLeaderboard = new GetLeaderboardRequest { StartPosition = 0, StatisticName = "Wins", MaxResultsCount = 20 };
         PlayFabClientAPI.GetLeaderboard(requestLeaderboard, OnGetLeadboard, OnErrorLeaderboard);
     }
     void OnGetLeadboard(GetLeaderboardResult result)
     {
+        leaderboardPanel.SetActive(true);
         //Debug.Log(result.Leaderboard[0].StatValue);
         foreach(PlayerLeaderboardEntry player in result.Leaderboard)
         {
+            GameObject tempListing = Instantiate(listingPrefab, listingContainer);
+            LeaderboardListing LL = tempListing.GetComponent<LeaderboardListing>();
+            LL.playerNameText.text = player.DisplayName;
+            LL.playerScoreText.text = player.StatValue.ToString();
             Debug.Log(player.DisplayName + ": " + player.StatValue);
         }
     }
-    
+    public void CloseLeaderboardPanel()
+    {
+        leaderboardPanel.SetActive(false);
+        for(int i = listingContainer.childCount - 1; i >= 0; i--)
+        {
+            Destroy(listingContainer.GetChild(i).gameObject);
+        }
+    }
     void OnErrorLeaderboard(PlayFabError error)
     {
         Debug.LogError(error.GenerateErrorReport());
