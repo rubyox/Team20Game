@@ -12,7 +12,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI waitingUnitsText;
     public TextMeshProUGUI unitInfoText;
     public TextMeshProUGUI winText;
-   
+
     // instance
     public static GameUI instance;
 
@@ -27,8 +27,6 @@ public class GameUI : MonoBehaviour
     {
         PlayerController.me.EndTurn();
     }
-
-  
 
     // toggles the interactivity of the end turn button
     public void ToggleEndTurnButton (bool toggle)
