@@ -6367,7 +6367,7 @@ PrefabInstance:
     - target: {fileID: 6338575424253333192, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
         type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6338575424253333193, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
         type: 3}
@@ -6406,6 +6406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338575424253333193, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338575424253333193, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -6433,6 +6438,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338575424253333207, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6338575424262899357, guid: 8e1d4017bae6cf14f97d63f87ec7657c,
         type: 3}

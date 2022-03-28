@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviourPun
         PlayerController player = winner == 0 ? leftPlayer : rightPlayer;
         if (PlayerController.me.units.Count == 0)
         {
-            PhotonNetwork.LeaveRoom();
-            
+            Invoke("GoBackToMenu", postGameTime);
+
         } else
         {
             LoginRegister.PFC.SetWins(1);
