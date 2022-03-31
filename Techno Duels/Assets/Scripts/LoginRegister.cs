@@ -135,7 +135,7 @@ public class LoginRegister : MonoBehaviour
     public List<PlayerLeaderboardEntry> GetWins()
     {
         GetLeaderboardRequest request = new GetLeaderboardRequest();
-        request.MaxResultsCount = 100;
+        request.MaxResultsCount = 20;
         request.StatisticName = "Wins";
         List<PlayerLeaderboardEntry> temp = new List<PlayerLeaderboardEntry>();
         PlayFabClientAPI.GetLeaderboard(request, result => {
@@ -143,7 +143,7 @@ public class LoginRegister : MonoBehaviour
         }, error =>{
            
         });
-        if(temp.Count < 20)
+        if(temp.Count < 0)
         {
             return null;
         }
@@ -153,6 +153,16 @@ public class LoginRegister : MonoBehaviour
 
     public void SetWins(int value)
     {
+        PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
+        {
+            // request.Statistics is a list, so multiple StatisticUpdate objects can be defined if required.
+            Statistics = new List<StatisticUpdate> {
+        new StatisticUpdate { StatisticName = "Wins", Value =  playerHighScore },
+            }
+        },
+        result => { Debug.Log("User statistics updated"); },
+        error => { Debug.LogError(error.GenerateErrorReport()); });
+
         GetPlayerStatisticsRequest findRequest = new GetPlayerStatisticsRequest();
         List<string> names = new List<string>();
         names.Add("Wins");
@@ -170,10 +180,18 @@ public class LoginRegister : MonoBehaviour
             su.Value += value;
             listUpdate.Add(su);
             request.Statistics = listUpdate;
-            playerHighScore = su.Value;
             
-          
-        }, error => { Debug.LogError(error.ErrorMessage); });
+            PlayFabClientAPI.UpdatePlayerStatistics(request, result2 => {
+
+                Debug.Log("Wins have been set!");
+
+            }, error => {
+
+            });
+
+        
+
+    }, error => { Debug.LogError(error.ErrorMessage); });
 
     }
 
