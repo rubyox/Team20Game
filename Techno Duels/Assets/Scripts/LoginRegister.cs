@@ -74,6 +74,7 @@ public class LoginRegister : MonoBehaviour
             {
                 SetDisplayText("Logged in with playfab ID: " + result.PlayFabId, Color.green);
                 playFabId = result.PlayFabId;
+                Debug.LogError("<color=green> encrypted password was : " + Encrypt(passwordInput.text));
                 np.ConnectToMaster();
                 GetStats();
                 if(onLoggedIn != null)
