@@ -135,7 +135,7 @@ public class LoginRegister : MonoBehaviour
     public List<PlayerLeaderboardEntry> GetWins()
     {
         GetLeaderboardRequest request = new GetLeaderboardRequest();
-        request.MaxResultsCount = 10;
+        request.MaxResultsCount = 100;
         request.StatisticName = "Wins";
         List<PlayerLeaderboardEntry> temp = new List<PlayerLeaderboardEntry>();
         PlayFabClientAPI.GetLeaderboard(request, result => {
@@ -143,7 +143,7 @@ public class LoginRegister : MonoBehaviour
         }, error =>{
            
         });
-        if(temp.Count < 1)
+        if(temp.Count < 20)
         {
             return null;
         }
@@ -170,13 +170,8 @@ public class LoginRegister : MonoBehaviour
             su.Value += value;
             listUpdate.Add(su);
             request.Statistics = listUpdate;
-            PlayFabClientAPI.UpdatePlayerStatistics(request, result2 => {
-
-                Debug.Log("Wins have been set!");
-
-            }, error => {
-
-            });
+            playerHighScore = su.Value;
+            
           
         }, error => { Debug.LogError(error.ErrorMessage); });
 
@@ -227,6 +222,7 @@ public class LoginRegister : MonoBehaviour
             su.Value += value;
             listUpdate.Add(su);
             request.Statistics = listUpdate;
+            playerHighScore = su.Value;
 
             PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
             {
@@ -235,9 +231,14 @@ public class LoginRegister : MonoBehaviour
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             }, OnCloudUpdateStats, OnErrorShared);
 
-            
-
         }, error => { Debug.LogError(error.ErrorMessage); });
+
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "UpdatePlayerStats", // Arbitrary function name (must exist in your uploaded cloud.js file)
+            FunctionParameter = new {  }, // The parameter provided to your function
+            GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+        }, OnCloudUpdateStats, OnErrorShared);
 
     }
     // OnCloudHelloWorld defined in the next code block
@@ -264,7 +265,7 @@ public class LoginRegister : MonoBehaviour
     #region Leaderboard
     public void GetLeaderboarder()
     {
-        var requestLeaderboard = new GetLeaderboardRequest { StartPosition = 0, StatisticName = "Wins", MaxResultsCount = 20 };
+        var requestLeaderboard = new GetLeaderboardRequest { StartPosition = 0, StatisticName = "Wins", MaxResultsCount = 100 };
         PlayFabClientAPI.GetLeaderboard(requestLeaderboard, OnGetLeadboard, OnErrorLeaderboard);
     }
     void OnGetLeadboard(GetLeaderboardResult result)
