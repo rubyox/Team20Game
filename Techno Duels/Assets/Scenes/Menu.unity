@@ -1837,8 +1837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -16.232403}
-  m_SizeDelta: {x: 0, y: 46.1227}
+  m_AnchoredPosition: {x: 0, y: -11.51}
+  m_SizeDelta: {x: 0, y: 36.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255612832
 MonoBehaviour:
@@ -1863,8 +1863,7 @@ MonoBehaviour:
   m_text: 'STEP 7
 
 
-    the player with at least one unit left standing will win
-    the game'
+    the player with at least one unit left standing will win '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -3463,7 +3462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &570690134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4619,9 +4618,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2044052188}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LoginRegister, Assembly-CSharp
-        m_MethodName: SetStats
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5366,7 +5365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &775023760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5387,8 +5386,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.163, y: -65}
-  m_SizeDelta: {x: 2908.436, y: 1080.4412}
+  m_AnchoredPosition: {x: 18, y: -71.45}
+  m_SizeDelta: {x: 2899.5, y: 1102.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775023761
 MonoBehaviour:
@@ -9987,7 +9986,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434753304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10344,8 +10343,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00013733, y: -54}
-  m_SizeDelta: {x: 1163.2, y: 317.199}
+  m_AnchoredPosition: {x: 0.025082, y: -27.2}
+  m_SizeDelta: {x: 1456.5, y: 412.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489359714
 MonoBehaviour:
@@ -12655,7 +12654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1790198904
 RectTransform:
   m_ObjectHideFlags: 0
