@@ -5933,8 +5933,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPlayer: {fileID: 840365306}
   rightPlayer: {fileID: 1689195675}
+  playerHighScore: 0
   curPlayer: {fileID: 0}
-  postGameTime: 8
+  postGameTime: 4
 --- !u!4 &1699251788
 Transform:
   m_ObjectHideFlags: 0

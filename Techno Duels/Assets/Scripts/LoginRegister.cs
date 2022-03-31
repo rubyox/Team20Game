@@ -18,7 +18,7 @@ public class LoginRegister : MonoBehaviour
 
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
-
+    public NetworkManager np;
     public TextMeshProUGUI displayText;
 
     public UnityEvent onLoggedIn;
@@ -39,7 +39,7 @@ public class LoginRegister : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-        DontDestroyOnLoad(this.gameObject);
+        
     }
     // encryption
     string Encrypt(string pass)
@@ -72,8 +72,9 @@ public class LoginRegister : MonoBehaviour
             // callback function for if register SUCCEEDED
             result =>
             {
-                SetDisplayText("Logged in as: " + result.PlayFabId, Color.green);
+                SetDisplayText("Logged in with playfab ID: " + result.PlayFabId, Color.green);
                 playFabId = result.PlayFabId;
+                np.ConnectToMaster();
                 GetStats();
                 if(onLoggedIn != null)
                     onLoggedIn.Invoke();
@@ -124,7 +125,7 @@ public class LoginRegister : MonoBehaviour
         {
             // request.Statistics is a list, so multiple StatisticUpdate objects can be defined if required.
             Statistics = new List<StatisticUpdate> {
-        new StatisticUpdate { StatisticName = "playerHighScore", Value =  playerHighScore },
+        new StatisticUpdate { StatisticName = "Wins", Value =  playerHighScore },
             }
         },
         result => { Debug.Log("User statistics updated"); },
@@ -207,14 +208,37 @@ public class LoginRegister : MonoBehaviour
     }
 
     // Build the request object and access the API
-    public void StartCloudUpdatePlayerStats()
+    public void StartCloudUpdatePlayerStats(int value)
     {
-        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        GetPlayerStatisticsRequest findRequest = new GetPlayerStatisticsRequest();
+        List<string> names = new List<string>();
+        names.Add("Wins");
+        findRequest.StatisticNames = names;
+        int temp = 0;
+        PlayFabClientAPI.GetPlayerStatistics(findRequest, result =>
         {
-            FunctionName = "UpdatePlayerStats", // Arbitrary function name (must exist in your uploaded cloud.js file)
-            FunctionParameter = new {highScore = playerHighScore}, // The parameter provided to your function
-            GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
-        }, OnCloudUpdateStats, OnErrorShared);
+
+            temp = result.Statistics[0].Value;
+            UpdatePlayerStatisticsRequest request = new UpdatePlayerStatisticsRequest();
+            List<StatisticUpdate> listUpdate = new List<StatisticUpdate>();
+            value += temp;
+            StatisticUpdate su = new StatisticUpdate();
+            su.StatisticName = "Wins";
+            su.Value += value;
+            listUpdate.Add(su);
+            request.Statistics = listUpdate;
+
+            PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "UpdatePlayerStats", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionParameter = new { wins = su.Value }, // The parameter provided to your function
+                GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+            }, OnCloudUpdateStats, OnErrorShared);
+
+            
+
+        }, error => { Debug.LogError(error.ErrorMessage); });
+
     }
     // OnCloudHelloWorld defined in the next code block
     private static void OnCloudUpdateStats(ExecuteCloudScriptResult result)

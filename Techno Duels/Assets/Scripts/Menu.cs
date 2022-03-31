@@ -11,7 +11,7 @@ public class Menu : MonoBehaviourPunCallbacks
     [Header("Screens")]
     public GameObject mainScreen;
     public GameObject lobbyScreen;
-
+    public GameObject loginScreen;
     [Header("Main Screen")]
     public Button playButton;
     public Button quitButton;
@@ -24,14 +24,14 @@ public class Menu : MonoBehaviourPunCallbacks
     void Start ()
     {
         // disable the play button before we connect to the master server
-        playButton.interactable = false;
+        playButton.interactable = true;
         gameStartingText.gameObject.SetActive(false);
     }
 
     // called when we connect to the master server
     public override void OnConnectedToMaster ()
     {
-        playButton.interactable = true;
+       
     }
 
     // toggles the currently visible screen
@@ -103,8 +103,8 @@ public class Menu : MonoBehaviourPunCallbacks
     public void OnQuitButton()
     {
         Debug.Log("QUIT!");
-        Application.Quit();
-        
+        PhotonNetwork.Disconnect();
+        SetScreen(loginScreen);
     }
 
 

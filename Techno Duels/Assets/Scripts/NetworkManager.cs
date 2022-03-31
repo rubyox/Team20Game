@@ -13,15 +13,19 @@ public class NetworkManager : MonoBehaviourPun
     {
         // set the instance to this script
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     void Start ()
     {
         // connect to the master server
-        PhotonNetwork.ConnectUsingSettings();
+       
     }
 
+    public void ConnectToMaster()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+    }
     // joins a random room or creates a new room
     public void CreateOrJoinRoom ()
     {

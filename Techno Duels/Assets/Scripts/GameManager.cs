@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviourPun
 
     void Start ()
     {
-        
-          
+
+
         
         
         // the master client will set the players
@@ -100,7 +100,8 @@ public class GameManager : MonoBehaviourPun
 
         } else
         {
-            LoginRegister.PFC.SetWins(1);
+            LoginRegister.PFC.StartCloudUpdatePlayerStats(1);
+            Invoke("GoBackToMenu", postGameTime);
         }
         
         
@@ -109,13 +110,14 @@ public class GameManager : MonoBehaviourPun
     GameUI.instance.SetWinText(player.photonPlayer.NickName);
        
         // go back to the menu after a few seconds
-        Invoke("GoBackToMenu", postGameTime);
+       
     }
 
     // leave the room and go back to the menu
     void GoBackToMenu ()
     {
         PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
         NetworkManager.instance.ChangeScene("Menu");
     }
 }
