@@ -101,16 +101,16 @@ public class GameManager : MonoBehaviourPun
         } else
         {
             LoginRegister.PFC.StartCloudUpdatePlayerStats(1);
-            Invoke("GoBackToMenu", postGameTime);
+            
         }
         
         
 
     // set the win text
     GameUI.instance.SetWinText(player.photonPlayer.NickName);
-       
+
         // go back to the menu after a few seconds
-       
+        Invoke("GoBackToMenu", postGameTime);
     }
 
     // leave the room and go back to the menu

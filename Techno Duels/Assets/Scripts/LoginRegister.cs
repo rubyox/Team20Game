@@ -181,7 +181,7 @@ public class LoginRegister : MonoBehaviour
             su.Value += value;
             listUpdate.Add(su);
             request.Statistics = listUpdate;
-            
+            playerHighScore = su.Value;
             PlayFabClientAPI.UpdatePlayerStatistics(request, result2 => {
 
                 Debug.Log("Wins have been set!");
